@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Cartonagem Criativa</title>
+    <style>
+        :root {
+            --primary: #d4a373;
+            --primary-light: #fefae0;
+            --dark: #4a3728;
+            --bg: #faf7f2;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--dark);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(74, 55, 40, 0.08);
+            border: 1px solid rgba(212, 163, 115, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--dark);
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        p.subtitle {
+            text-align: center;
+            color: #8c7867;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.2);
+        }
+
+        button {
+            width: 100%;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #bfa27a;
+        }
+
+        .results {
+            margin-top: 25px;
+            background-color: var(--primary-light);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .result-item.total {
+            font-size: 18px;
+            font-weight: bold;
+            border-top: 1px solid rgba(74, 55, 40, 0.2);
+            padding-top: 10px;
+            margin-top: 10px;
+            color: var(--dark);
+        }
+
+        .badge {
+            background-color: var(--primary);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 11px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Calculadora de Cartonagem</h1>
+    <p class="subtitle">Precificação Inteligente para Caixas de Alto Padrão</p>
+
+    <div class="section-title">1. Placa de Papelão Cinza (Placa Inteira)</div>
+    <div class="grid-2">
+        <div class="input-group">
+            <label>Preço da Placa Inteira (R$)</label>
+            <input type="number" id="precoPlaca" value="12.50" step="0.01">
+        </div>
+        <div class="input-group">
+            <label>Largura da Placa (cm)</label>
+            <input type="number" id="larguraPlaca" value="100">
+        </div>
+    </div>
+    <div class="grid-2">
+        <div class="input-group">
+            <label>Altura da Placa (cm)</label>
+            <input type="number" id="alturaPlaca" value="80">
+        </div>
+        <div class="input-group">
+            <label>Espessura (Gramatura)</label>
+            <select id="gramatura">
+                <option value="1.9">1.9 mm</option>
+                <option value="2.0" selected>2.0 mm</option>
+                <option value="2.3">2.3 mm</option>
+                <option value="2.8">2.8 mm</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="section-title">2. Dimensões Cortadas para a Caixa <span class="badge">Soma de todas as partes</span></div>
+    <p style="font-size: 11px; color: #8c7867; margin-top: -5px; margin-bottom: 10px;">Some a largura e a altura de todas as peças (base, laterais, tampa) como se as juntasse em um retângulo para ter a área total gasta.</p>
+    <div class="grid-2">
+        <div class="input-group">
+            <label>Largura Total gasta (cm)</label>
+            <input type="number" id="larguraGasta" value="40">
+        </div>
+        <div class="input-group">
+            <label>Altura Total gasta (cm)</label>
+            <input type="number" id="alturaGasta" value="30">
+        </div>
+    </div>
+
+    <div class="section-title">3. Revestimento, Insumos e Tempo</div>
+    <div class="grid-2">
+        <div class="input-group">
+            <label>Papel / Tecido (R$)</label>
+            <input type="number" id="custoRevestimento" value="4.50" step="0.01">
+        </div>
+        <div class="input-group">
+            <label>Adicionais (Fita, Cola, Ilhós) (R$)</label>
+            <input type="number" id="custoAdicionais" value="2.00" step="0.01">
+        </div>
+    </div>
+    <div class="grid-2">
+        <div class="input-group">
+            <label>Tempo de Produção (Minutos)</label>
+            <input type="number" id="tempoMinutos" value="45">
+        </div>
+        <div class="input-group">
+            <label>Custo da sua Hora (R$)</label>
+            <input type="number" id="custoHora" value="20.00" step="0.01">
+        </div>
+    </div>
+
+    <div class="section-title">4. Negócio e Lucro</div>
+    <div class="grid-2">
+        <div class="input-group">
+            <label>Margem de Lucro Desejada (%)</label>
+            <input type="number" id="margemLucro" value="100">
+        </div>
+        <div class="input-group">
+            <label>Custo Fixo Rateado (R$)</label>
+            <input type="number" id="custofixo" value="1.50" step="0.01" title="Luz, internet, ferramentas depreciadas por caixa">
+        </div>
+    </div>
+
+    <button onclick="calcularPreco()">Calcular Preço da Caixa</button>
+
+    <div class="results" id="resultadoDiv" style="display:none;">
+        <div class="result-item">
+            <span>Custo do Papelão Cinza gasta:</span>
+            <span id="resPapelao">R$ 0,00</span>
+        </div>
+        <div class="result-item">
+            <span>Custo de Revestimento e Insumos:</span>
+            <span id="resMateriais">R$ 0,00</span>
+        </div>
+        <div class="result-item">
+            <span>Custo da sua Mão de Obra:</span>
+            <span id="resMaoDeObra">R$ 0,00</span>
+        </div>
+        <div class="result-item">
+            <span>Custo Fixo Operacional:</span>
+            <span id="resFixo">R$ 0,00</span>
+        </div>
+        <div class="result-item" style="font-weight: bold; color: #c0392b;">
+            <span>Custo Total de Produção:</span>
+            <span id="resCustoTotal">R$ 0,00</span>
+        </div>
+        <div class="result-item total">
+            <span>Preço Sugerido de Venda:</span>
+            <span id="resPrecoVenda">R$ 0,00</span>
+        </div>
+    </div>
+</div>
+
+<script>
+function calcularPreco() {
+    // 1. Capturar os valores dos inputs
+    const precoPlaca = parseFloat(document.getElementById('precoPlaca').value) || 0;
+    const larguraPlaca = parseFloat(document.getElementById('larguraPlaca').value) || 1;
+    const alturaPlaca = parseFloat(document.getElementById('alturaPlaca').value) || 1;
+    
+    const larguraGasta = parseFloat(document.getElementById('larguraGasta').value) || 0;
+    const alturaGasta = parseFloat(document.getElementById('alturaGasta').value) || 0;
+    
+    const custoRevestimento = parseFloat(document.getElementById('custoRevestimento').value) || 0;
+    const custoAdicionais = parseFloat(document.getElementById('custoAdicionais').value) || 0;
+    
+    const tempoMinutos = parseFloat(document.getElementById('tempoMinutos').value) || 0;
+    const custoHora = parseFloat(document.getElementById('custoHora').value) || 0;
+    
+    const margemLucro = parseFloat(document.getElementById('margemLucro').value) || 0;
+    const custoFixo = parseFloat(document.getElementById('custofixo').value) || 0;
+
+    // 2. Cálculos matemáticos
+    // Cálculo por área em cm² (Método mais assertivo do mercado de cartonagem)
+    const areaPlaca = larguraPlaca * alturaPlaca;
+    const areaGasta = larguraGasta * alturaGasta;
+    
+    // Adiciona uma quebra técnica automática de 10% para cobrir retalhos de corte e perdas
+    const areaComPerda = areaGasta * 1.10; 
+    
+    const custoPapelaoItem = (areaComPerda / areaPlaca) * precoPlaca;
+    
+    // Mão de obra baseada nos minutos trabalhados
+    const custoMaoDeObra = (tempoMinutos / 60) * custoHora;
+    
+    // Soma de todos os custos diretos e indiretos
+    const custoMateriaisInsumos = custoRevestimento + custoAdicionais;
+    const custoTotalProducao = custoPapelaoItem + custoMateriaisInsumos + custoMaoDeObra + custoFixo;
+    
+    // Aplicação do lucro sobre o custo de produção
+    const precoVenda = custoTotalProducao * (1 + (margemLucro / 100));
+
+    // 3. Formatar e exibir os resultados na tela
+    document.getElementById('resPapelao').innerText = custoPapelaoItem.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    document.getElementById('resMateriais').innerText = custoMateriaisInsumos.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    document.getElementById('resMaoDeObra').innerText = custoMaoDeObra.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    document.getElementById('resFixo').innerText = custoFixo.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    document.getElementById('resCustoTotal').innerText = custoTotalProducao.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    document.getElementById('resPrecoVenda').innerText = precoVenda.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+    // Mostrar a div de resultados com efeito suave
+    document.getElementById('resultadoDiv').style.display = 'block';
+}
+</script>
+
+</body>
+</html>
